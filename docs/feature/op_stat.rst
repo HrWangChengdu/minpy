@@ -5,6 +5,7 @@ In the default ``PreferMXNetPolicy()``, the operation prefers to MXNet implement
 To better locate those operations, method ``show_op_stat()`` is provided to show the dispatch statistics information, i.e. which operation and how many operations are executed in MXNet and the same for NumPy. For example, the following network is trained in the default ``PreferMXNetPolicy()``. ``show_op_stat()`` is called after training is finished
 
 ::
+
     from minpy.core import grad
     import minpy.numpy as np
     import minpy.numpy.random as random
