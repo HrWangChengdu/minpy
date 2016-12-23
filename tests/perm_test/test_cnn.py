@@ -62,11 +62,11 @@ def test_cnn():
         def loss(self, predict, y):
             return layers.softmax_loss(predict, y)
     
-    def main(args):
+    def main():
         # Create model.
         model = ConvolutionNet()
         # Create data iterators for training and testing sets.
-        data = get_CIFAR10_data(args.data_dir)
+        data = get_CIFAR10_data('../../examples/dataset/cifar10/cifar-10-batches-py')
         train_dataiter = NDArrayIter(data=data['X_train'],
                                      label=data['y_train'],
                                      batch_size=batch_size,
@@ -102,11 +102,13 @@ def test_cnn():
         # a normal cnn should reach 50% train acc
         assert (train_acc >= 0.40)
 
+    """ Have trouble using argparse in nosetest
     parser = argparse.ArgumentParser(description="Multi-layer perceptron example using minpy operators")
     parser.add_argument('--data_dir',
                         type=str,
                         default='../../examples/dataset/cifar10/cifar-10-batches-py')
-    main(parser.parse_args())
+    """
+    main()
 
 if __name__ == '__main__':
     test_cnn()
