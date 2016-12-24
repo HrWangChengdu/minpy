@@ -66,7 +66,7 @@ def test_cnn():
         # Create model.
         model = ConvolutionNet()
         # Create data iterators for training and testing sets.
-        data = get_CIFAR10_data('../../examples/dataset/cifar10/cifar-10-batches-py')
+        data = get_CIFAR10_data('examples/dataset/cifar10/cifar-10-batches-py')
         train_dataiter = NDArrayIter(data=data['X_train'],
                                      label=data['y_train'],
                                      batch_size=batch_size,
