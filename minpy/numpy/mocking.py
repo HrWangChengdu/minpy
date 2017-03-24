@@ -61,26 +61,24 @@ class Module(object):
             # Define gradients of primitives.
             mod.def_grads(primitive_getter)
         self._logger.info('Import %d primitives', len(self._registry._reg))
-
-        self.policy = minpy.Config['default_policy']
-        self.generate_attrs()
+        self.generate_attrs(minpy.Config['default_policy'])
         # pylint: enable= protected-access, cell-var-from-loop
 
     def set_policy(self, policy):
         """[Deprecated] Set policy for this module."""
-        self.policy = policy
-        self.generate_attrs()
+        self.generate_attrs(policy)
 
     def record_op_stat(self):
         """Record Op Calling Statistics"""
-        self.generate_attrs(True)
+        self.generate_attrs(self.policy, True)
 
     def show_op_stat(self):
         """Show Op Calling Statistics"""
         self.policy.show_op_stat()
 
-    def generate_attrs(self, use_selector=False):
+    def generate_attrs(self, policy, use_selector=False):
         """Generate attributes for this module"""
+        self.policy = policy
         # The latter will override the former, so set attributes in reverse priority order
         for k, val in self._old.items():
             setattr(self, k, val)
